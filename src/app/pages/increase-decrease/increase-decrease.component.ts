@@ -46,12 +46,14 @@ export class IncreaseDecreaseComponent implements AfterViewInit {
 
   // get difference
   diff (num1, num2) {
-    return num1 - num2
+    let num = num1 - num2
+    return num.toFixed(4)
   }
 
   // get percentage
   diffPercentage (num1, num2) {
-    return ((num1 / num2)*100)
+    let num = ((num1 / num2)*100)
+    return num.toFixed(4)
   }
 
   callApi() {

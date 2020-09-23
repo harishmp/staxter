@@ -67,7 +67,7 @@ export class TableComponent implements AfterViewInit {
         } else {
           increaseDecrease = 'fa fa-ellipsis-h';
         }
-        this.items.push({'Currency':key, 'Spot':this.today[key], 'increaseDecrease': increaseDecrease, 'Chart': ''});
+        this.items.push({'Currency':key, 'Spot':this.today[key].toFixed(4), 'increaseDecrease': increaseDecrease, 'Chart': ''});
       })
       // console.log("this.items---", this.items);
       this.dataSource = new MatTableDataSource(this.items);
