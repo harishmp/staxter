@@ -36,3 +36,13 @@ th, td {
   font-size: 15px;
   font-weight: 700;
 }
+.card-header {
+  padding: .45rem 1.25rem;
+  margin-bottom: 0;
+  text-align: end;
+  background-color: rgba(0,123,255,.25);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+h4 {
+  text-align: initial;
+}

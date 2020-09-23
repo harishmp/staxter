@@ -53,7 +53,7 @@ export class HistoricalDataComponent implements OnInit {
   }
 
   callApi() {
-    // get historical data between two dates
+    // get historical data between two dates of last 30 days based on base 'EUR' using startEndApi
     this.latestService.getHistoricalDataapi(this.start_at, this.end_at, 'EUR').subscribe(res => {   
       let resObj = res.json();
       this.result = [resObj.rates];

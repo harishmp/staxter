@@ -25,12 +25,22 @@ export class TableComponent implements AfterViewInit {
   today = [];
   yesterday = [];
   items=[];
+  result = [];
+  Base;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public latestService: DataService, private router: Router) { }
 
   ngOnInit(): void {
+    this.latestService.currentMessage.subscribe(message => 
+      {
+        this.Base = message;
+        if(this.result[0] != undefined) {
+          this.items = [];
+          this.callApi();
+        }
+      });
     this.callApi();
   }
 
@@ -39,35 +49,29 @@ export class TableComponent implements AfterViewInit {
   }
 
   callApi() {
-    this.latestService.gethistoricalrateTodaysapi().subscribe(res => {   
+    // get data of 2020-01-20 (today), 2020-01-16(yesterday) based on base using startEndApi
+    this.latestService.getHistoricalDataapi('2020-01-16', '2020-01-20', this.Base).subscribe(res => {   
       let resObj = res.json();
-      this.today = resObj;
+      this.result = [resObj.rates];
+      this.today = this.result[0]['2020-01-20'];
+      this.yesterday = this.result[0]['2020-01-16'];
 
-      this.latestService.gethistoricalratesYesterdayapi().subscribe(res => {   
-        let resObj = res.json();
-        this.yesterday = resObj;
-  
-        Object.keys(this.today['rates']).forEach(key => {
-          let increaseDecrease = 'fa fa-ellipsis-h';
-          if(this.today['rates'][key] == this.yesterday['rates'][key]) {
-            increaseDecrease = 'fa fa-align-justify';
-          } else if(this.today['rates'][key] > this.yesterday['rates'][key]) {
-            increaseDecrease = 'fa fa-arrow-up';
-          } else if(this.today['rates'][key] < this.yesterday['rates'][key]) {
-            increaseDecrease = 'fa fa-arrow-down';
-          } else {
-            increaseDecrease = 'fa fa-ellipsis-h';
-          }
-          this.items.push({'Currency':key, 'Spot':this.today['rates'][key], 'increaseDecrease': increaseDecrease, 'Chart': ''});
-        })
-        console.log("this.items---", this.items);
-        this.dataSource = new MatTableDataSource(this.items);
-        this.dataSource.paginator = this.paginator;
-      },
-      err => {
-        console.log('In Error Block');
-        console.log(typeof (err));
-      });
+      Object.keys(this.today).forEach(key => {
+        let increaseDecrease = 'fa fa-ellipsis-h';
+        if(this.today[key] == this.yesterday[key]) {
+          increaseDecrease = 'fa fa-align-justify';
+        } else if(this.today[key] > this.yesterday[key]) {
+          increaseDecrease = 'fa fa-arrow-up';
+        } else if(this.today[key] < this.yesterday[key]) {
+          increaseDecrease = 'fa fa-arrow-down';
+        } else {
+          increaseDecrease = 'fa fa-ellipsis-h';
+        }
+        this.items.push({'Currency':key, 'Spot':this.today[key], 'increaseDecrease': increaseDecrease, 'Chart': ''});
+      })
+      // console.log("this.items---", this.items);
+      this.dataSource = new MatTableDataSource(this.items);
+      this.dataSource.paginator = this.paginator;
     },
     err => {
       console.log('In Error Block');
