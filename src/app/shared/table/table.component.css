@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+}
+/* -------bottom pag mod ------ */
+.mat-paginator-container {
+  /* display: flex; */
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+}
+.mat-paginator-page-size {
+  display: flex;
+  align-items: baseline;
+  /* margin-left: 8px; */
+  float: left;
+}
+.mat-paginator-range-actions {
+  display: flex;
+  align-items: center;
+  align-items: baseline;
+  float: right;
+}
+.fa-arrow-up {
+  color: green;
+}
+.fa-arrow-down {
+  color: red;
+}
+th, td {
+  text-align: center !important;
+}
+.mat-header-cell {
+  color: black;
+  font-size: 15px;
+  font-weight: 700;
+}

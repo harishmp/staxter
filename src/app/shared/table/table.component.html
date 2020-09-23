@@ -1,0 +1,40 @@
+<div class="">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Currency Column -->
+      <ng-container matColumnDef="Currency">
+        <th mat-header-cell *matHeaderCellDef> Currency </th>
+        <td mat-cell *matCellDef="let element"> {{element.Currency}} </td>
+      </ng-container>
+  
+      <!-- increaseDecrease Column -->
+      <!-- <ng-container matColumnDef="increaseDecrease">
+        <th mat-header-cell *matHeaderCellDef> increaseDecrease </th>
+        <td mat-cell *matCellDef="let element" > {{element.increaseDecrease}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="increaseDecrease">
+        <th mat-header-cell *matHeaderCellDef> Increase / Decrease </th>
+        <td mat-cell *matCellDef="let element" > <i class={{element.increaseDecrease}} aria-hidden="true"></i> </td>
+      </ng-container>
+  
+      <!-- Spot Column -->
+      <ng-container matColumnDef="Spot">
+        <th mat-header-cell *matHeaderCellDef> Spot </th>
+        <td mat-cell *matCellDef="let element"> {{element.Spot}} </td>
+      </ng-container>
+  
+      <!-- Chart Column -->
+      <ng-container matColumnDef="Chart">
+        <th mat-header-cell *matHeaderCellDef> Chart </th>
+        <td mat-cell *matCellDef="let element" (click)="onClickRow(element.Currency)" style="cursor: pointer;"> 
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> 
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  
