@@ -7,12 +7,12 @@ import { IncreaseDecreaseComponent } from './pages/increase-decrease/increase-de
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: '', redirectTo: 'latest-rates', pathMatch: 'full'},
   {path: 'latest-rates', component: LatestRatesComponent},
   {path: 'historical-data', component: HistoricalDataComponent},
   {path: 'increase-decrease', component: IncreaseDecreaseComponent},
   // {path: '', component: MainLayoutComponent, children: mainRoutes},
-  {path: '**', redirectTo: 'dashboard'}
+  {path: '**', redirectTo: 'latest-rates'}
 ];
 
 @NgModule({
